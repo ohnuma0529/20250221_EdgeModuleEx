@@ -1,0 +1,23 @@
+{
+    "server": {
+        "IP": "172.16.15.127",
+        "user" : "ohnuma",
+        "password" : "dnn",
+        "save_path" : "/home/ohnuma/Happy/20250207WiltExModule/data"
+    },
+    "control": {
+        "IP": "172.16.15.211",
+        "ID": "control"
+    },
+    "edge": {
+        "IP": "172.16.15.211",
+        "ID": "test",
+        "tracking_num" : 10,
+        "server_flag": false,
+        "start_time" : "0700",
+        "end_time" : "1700",
+        "width" : 640,
+        "height" : 480,
+        "save_path" : "data"
+    }
+}

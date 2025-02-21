@@ -1,0 +1,15 @@
+[Unit]
+Description=CPU Checker for Raspberry Pi
+After=network.target
+
+[Service]
+ExecStart=/home/ohnuma/Desktop/EdgeModule/EdgeWilt_env/bin/python3 /home/ohnuma/Desktop/EdgeModule/cpu_checker.py
+WorkingDirectory=/home/ohnuma/Desktop/EdgeModule
+Restart=always
+RestartSec=5
+User=ohnuma
+StandardOutput=append:/var/log/cpu_checker.log
+StandardError=append:/var/log/cpu_checker.log
+
+[Install]
+WantedBy=multi-user.target

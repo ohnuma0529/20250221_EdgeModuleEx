@@ -1,0 +1,13 @@
+[Unit]
+Description=Copy Folder Script
+After=network.target
+
+[Service]
+Type=simple
+User=ohnuma
+WorkingDirectory=/home/ohnuma/Desktop/EdgeModule
+ExecStart=/home/ohnuma/Desktop/EdgeModule/EdgeWilt_env/bin/python3 /home/ohnuma/Desktop/EdgeModule/copy_folder.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
