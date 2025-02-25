@@ -31,6 +31,7 @@ source EdgeModule/bin/activate
 # 必要なパッケージをインストール
 pip install --upgrade pip
 pip install -r /home/pi/Desktop/20250221_EdgeModuleEx/requirements.txt
+sudo apt install -y sshpass
 
 # リポジトリフォルダへ移動
 cd 20250221_EdgeModuleEx
