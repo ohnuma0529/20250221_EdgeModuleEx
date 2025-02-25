@@ -57,6 +57,8 @@ else
     echo "重みファイルは既に存在します。"
 fi
 
+cd service
+
 # systemdサービスを設定
 sudo cp calc_wilt.service /etc/systemd/system/
 sudo cp calc_wilt.timer /etc/systemd/system/

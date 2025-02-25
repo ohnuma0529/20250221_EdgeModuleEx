@@ -3,7 +3,7 @@ Description=CPU Checker for Raspberry Pi
 After=network.target
 
 [Service]
-ExecStart=/home/pi/Desktop/20250221_EdgeModuleEx/EdgeModule/bin/python3 /home/pi/Desktop/20250221_EdgeModuleEx/cpu_checker.py
+ExecStart=/home/pi/Desktop/EdgeModule/bin/python3 /home/pi/Desktop/20250221_EdgeModuleEx/cpu_checker.py
 WorkingDirectory=/home/pi/Desktop/20250221_EdgeModuleEx
 Restart=always
 RestartSec=5
