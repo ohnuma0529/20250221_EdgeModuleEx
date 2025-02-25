@@ -5,11 +5,11 @@ set -e  # エラーが発生したら即終了
 echo "セットアップを開始します..."
 
 # 必要ならコメント解除して実行
-# sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 # Git ユーザー設定（必要ならコメント解除）
-# git config --global user.name "ohnuma"
-# git config --global user.email "onuma.riku.20@shizuoka.ac.jp"
+git config --global user.name "ohnuma0529"
+git config --global user.email "onuma.riku.20@shizuoka.ac.jp"
 
 # デスクトップへ移動
 cd /home/pi/Desktop
