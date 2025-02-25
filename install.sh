@@ -35,6 +35,13 @@ pip install -r /home/pi/Desktop/20250221_EdgeModuleEx/requirements.txt
 # リポジトリフォルダへ移動
 cd 20250221_EdgeModuleEx
 
+# Depth Anything v2をclone
+if [ ! -d "./Depth-Anything-V2" ]; then
+    git clone https://github.com/DepthAnything/Depth-Anything-V2.git
+else
+    echo "Depth-Anything-V2 は既に存在します。"
+fi
+
 # Depth Anything の重みファイルをダウンロード
 DEPTH_MODEL_DIR="Depth-Anything-V2"
 MODEL_URL="https://huggingface.co/depth-anything/Depth-Anything-V2-Small/resolve/main/depth_anything_v2_vits.pth"

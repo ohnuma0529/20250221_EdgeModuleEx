@@ -3,15 +3,15 @@
         "IP": "192.168.200.100",
         "user" : "happyai2023",
         "password" : "MNNlb#1401",
-        "save_path" : "/home/happyai2023/20250224_WiltModuleEx_data/03"
+        "save_path" : "/home/happyai2023/20250224_WiltModuleEx_data/01"
     },
     "control": {
         "IP": "192.168.55.100",
         "ID": "ohnuma"
     },
     "edge": {
-        "IP": "192.168.200.104",
-        "ID": "04",
+        "IP": "192.168.200.101",
+        "ID": "01",
         "tracking_num" : 10,
         "server_flag": false,
         "start_time" : "0700",
