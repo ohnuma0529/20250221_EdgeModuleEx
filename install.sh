@@ -50,7 +50,10 @@ else
     echo "重みファイルは既に存在します。"
 fi
 
+git clone https://github.com/DepthAnything/Depth-Anything-V2.git
+
 # systemdサービスを設定
+cd service
 sudo cp calc_wilt.service /etc/systemd/system/
 sudo cp calc_wilt.timer /etc/systemd/system/
 sudo cp copy_folder.service /etc/systemd/system/
