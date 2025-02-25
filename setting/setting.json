@@ -10,8 +10,8 @@
         "ID": "ohnuma"
     },
     "edge": {
-        "IP": "192.168.200.103",
-        "ID": "03",
+        "IP": "192.168.200.104",
+        "ID": "04",
         "tracking_num" : 10,
         "server_flag": false,
         "start_time" : "0700",

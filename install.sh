@@ -8,8 +8,8 @@ echo "セットアップを開始します..."
 # sudo apt update && sudo apt upgrade -y
 
 # Git ユーザー設定（必要ならコメント解除）
-git config --global user.name "ohnuma0529"
-git config --global user.email "onuma.riku.20@shizuoka.ac.jp"
+# git config --global user.name "ohnuma"
+# git config --global user.email "onuma.riku.20@shizuoka.ac.jp"
 
 # デスクトップへ移動
 cd /home/pi/Desktop
@@ -21,9 +21,6 @@ else
     echo "リポジトリは既に存在します。"
 fi
 
-# リポジトリフォルダへ移動
-cd 20250221_EdgeModuleEx
-
 # 仮想環境を作成 & 有効化
 if [ ! -d "EdgeModule" ]; then
     python3 -m venv EdgeModule
@@ -33,17 +30,13 @@ source EdgeModule/bin/activate
 
 # 必要なパッケージをインストール
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r /home/pi/Desktop/20250221_EdgeModuleEx/requirements.txt
 
-# Depth Anything v2をclone
-if [ ! -d "./Depth-Anything-V2" ]; then
-    git clone https://github.com/DepthAnything/Depth-Anything-V2.git
-else
-    echo "Depth-Anything-V2 は既に存在します。"
-fi
+# リポジトリフォルダへ移動
+cd 20250221_EdgeModuleEx
 
 # Depth Anything の重みファイルをダウンロード
-DEPTH_MODEL_DIR="./Depth-Anything-V2"
+DEPTH_MODEL_DIR="Depth-Anything-V2"
 MODEL_URL="https://huggingface.co/depth-anything/Depth-Anything-V2-Small/resolve/main/depth_anything_v2_vits.pth"
 MODEL_PATH="$DEPTH_MODEL_DIR/depth_anything_v2_vits.pth"
 
@@ -58,7 +51,6 @@ else
 fi
 
 # systemdサービスを設定
-cd service
 sudo cp calc_wilt.service /etc/systemd/system/
 sudo cp calc_wilt.timer /etc/systemd/system/
 sudo cp copy_folder.service /etc/systemd/system/

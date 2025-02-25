@@ -25,7 +25,7 @@ def main():
     end_datetime = datetime.combine(datetime.today().date(), end_time)
     
     date = now_time.strftime('%Y%m%d')
-    source_dir = "data/" + date
+    source_dir = "/home/pi/Desktop/data/" + date
     os.makedirs(source_dir, exist_ok=True)
     csv_path = os.path.join(source_dir, "result.csv")
     image_dir = os.path.join(source_dir, "images")
