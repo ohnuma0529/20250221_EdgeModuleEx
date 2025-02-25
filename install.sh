@@ -35,6 +35,9 @@ source EdgeModule/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 
+# Depth Anything v2をclone
+git clone https://github.com/DepthAnything/Depth-Anything-V2.git
+
 # Depth Anything の重みファイルをダウンロード
 DEPTH_MODEL_DIR="Depth-Anything-V2"
 MODEL_URL="https://huggingface.co/depth-anything/Depth-Anything-V2-Small/resolve/main/depth_anything_v2_vits.pth"
@@ -49,8 +52,6 @@ if [ ! -f "$MODEL_PATH" ]; then
 else
     echo "重みファイルは既に存在します。"
 fi
-
-git clone https://github.com/DepthAnything/Depth-Anything-V2.git
 
 # systemdサービスを設定
 cd service
