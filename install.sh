@@ -5,7 +5,7 @@ set -e  # エラーが発生したら即終了
 echo "セットアップを開始します..."
 
 # 必要ならコメント解除して実行
-sudo apt update && sudo apt upgrade -y
+# sudo apt update && sudo apt upgrade -y
 
 # Git ユーザー設定（必要ならコメント解除）
 git config --global user.name "ohnuma0529"
@@ -36,10 +36,14 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Depth Anything v2をclone
-git clone https://github.com/DepthAnything/Depth-Anything-V2.git
+if [ ! -d "./Depth-Anything-V2" ]; then
+    git clone https://github.com/DepthAnything/Depth-Anything-V2.git
+else
+    echo "Depth-Anything-V2 は既に存在します。"
+fi
 
 # Depth Anything の重みファイルをダウンロード
-DEPTH_MODEL_DIR="Depth-Anything-V2"
+DEPTH_MODEL_DIR="./Depth-Anything-V2"
 MODEL_URL="https://huggingface.co/depth-anything/Depth-Anything-V2-Small/resolve/main/depth_anything_v2_vits.pth"
 MODEL_PATH="$DEPTH_MODEL_DIR/depth_anything_v2_vits.pth"
 
