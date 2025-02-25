@@ -18,6 +18,6 @@
         "end_time" : "2300",
         "width" : 1024,
         "height" : 1024,
-        "save_path" : "data"
+        "save_path" : "/home/pi/Desktop/data"
     }
 }
