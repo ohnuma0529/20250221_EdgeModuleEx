@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=ohnuma
-WorkingDirectory=/home/ohnuma/Desktop/EdgeModule
-ExecStart=/home/ohnuma/Desktop/EdgeModule/EdgeWilt_env/bin/python3 /home/ohnuma/Desktop/EdgeModule/main.py
+User=pi
+WorkingDirectory=/home/pi/Desktop/20250221_EdgeModuleEx
+ExecStart=/home/pi/Desktop/20250221_EdgeModuleEx/EdgeModule/bin/python3 /home/pi/Desktop/20250221_EdgeModuleEx/main.py
 Restart=on-failure

@@ -1,5 +1,5 @@
 {
-    "HappyQuality": {
+    "HappyAIServer": {
         "url": "http://192.168.200.100:8086",
         "bucket" : "HappyQuality",
         "token": "v6-cULkpbrgxStqN9MmyDNx4jGECM6IzHIomRV4-WVS_wEo4zgAfNz2AWyw6ZUTAyJpJ9j7TUxIWl0m_vsI6jw==",
@@ -12,7 +12,7 @@
         "org": "MinenoLaboratory"
     },
     "HappyAI": {
-        "url": "http://172.16.15.211:8086",
+        "url": "http://192.168.55.100:8086",
         "bucket" : "202502_HQ_Edge",
         "token": "vGMU1VtJKbpC8HlMzRuyKP2lInNkkXbgLZsIEL_FqsoG7jV9bCbSrbj_X-_ObS2yOeUcHBFDdM7mfnVyfS5j9w==",
         "org": "MinenoLaboratory"

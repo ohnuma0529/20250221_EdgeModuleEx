@@ -12,5 +12,5 @@ id = "test"
 
 for i in range(int((end_time - start_time).total_seconds() / 60)):
     now_time = start_time + timedelta(minutes=i)
-    # print(now_time)
+    # デフォルトでは撮影➡定量化なので注意
     main(id, now_time, 10, False)

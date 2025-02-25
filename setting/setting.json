@@ -1,23 +1,23 @@
 {
     "server": {
-        "IP": "172.16.15.127",
-        "user" : "ohnuma",
-        "password" : "dnn",
-        "save_path" : "/home/ohnuma/Happy/20250207WiltExModule/data"
+        "IP": "192.168.200.100",
+        "user" : "happyai2023",
+        "password" : "MNNlb#1401",
+        "save_path" : "/home/happyai2023/20250224_WiltModuleEx_data/01"
     },
     "control": {
-        "IP": "172.16.15.211",
-        "ID": "control"
+        "IP": "192.168.55.100",
+        "ID": "ohnuma"
     },
     "edge": {
-        "IP": "172.16.15.211",
-        "ID": "test",
+        "IP": "192.168.200.101",
+        "ID": "01",
         "tracking_num" : 10,
         "server_flag": false,
         "start_time" : "0700",
         "end_time" : "1700",
-        "width" : 640,
-        "height" : 480,
+        "width" : 1024,
+        "height" : 1024,
         "save_path" : "data"
     }
 }

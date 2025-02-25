@@ -460,53 +460,53 @@ class image_processor:
         image = cv2.resize(image, (self.detect_size, self.detect_size))
         self.key_list = [int(i.split("_")[0]) for i in self.df.columns if "_bbox_x1" in i]
         print("key_list:", self.key_list)
-        # self.key_list = self.get_key_list()
-        # print("key_list:", self.key_list)
-        results = self.detect.predict(image, imgsz=self.detect_size, conf=0.3)
-        result = results[0]
-        bbox_list = [box.xyxy[0].tolist() for box in result.boxes]
+        try:
+            results = self.detect.predict(image, imgsz=self.detect_size, conf=0.3)
+            result = results[0]
+            bbox_list = [box.xyxy[0].tolist() for box in result.boxes]
 
-        # ３種類の削除関数を実行し，key_listを更新
-        self.check_bbox()
-        self.check_bbox2()
-        self.check_bbox3()
+            # ３種類の削除関数を実行し，key_listを更新
+            self.check_bbox()
+            self.check_bbox2()
+            self.check_bbox3()
 
-        # IoUが高いBBoxを用いて更新
-        # bbox情報を更新
-        self.df = self.get_best_bbox(bbox_list)
-        
-        for i in self.key_list:
-            x1 = self.df[str(i) + "_bbox_x1"].dropna().iloc[-1]
-            y1 = self.df[str(i) + "_bbox_y1"].dropna().iloc[-1]
-            x2 = self.df[str(i) + "_bbox_x2"].dropna().iloc[-1]
-            y2 = self.df[str(i) + "_bbox_y2"].dropna().iloc[-1]
-            # bboxから画像を切り出して640x640にリサイズ
-            clip, new_x1, new_y1, new_x2, new_y2 = get_frame(image, [x1, y1, x2, y2])
-            clip = cv2.resize(clip, (self.pose_size, self.pose_size))
-            # POSE推定
-            pose_results = self.pose.predict(clip, imgsz=640, conf=0.1)
-            xys = pose_results[0].keypoints.xy[0].tolist()
-            base_x, base_y = xys[0][0], xys[0][1]
-            tip_x, tip_y = xys[1][0], xys[1][1]
-            base_x = base_x /self.pose_size * (new_x2 - new_x1) + new_x1
-            base_y = base_y /self.pose_size * (new_y2 - new_y1) + new_y1
-            tip_x = tip_x /self.pose_size * (new_x2 - new_x1) + new_x1
-            tip_y = tip_y /self.pose_size * (new_y2 - new_y1) + new_y1
-            # dfに保存
-            self.df.loc[self.now_time, [f'{i}_base_x', f'{i}_base_y', f'{i}_tip_x', f'{i}_tip_y', f'{i}_angle', f'{i}_length']] = [
-                base_x, base_y, tip_x, tip_y,
-                np.arctan2(tip_y - base_y, tip_x - base_x),
-                np.sqrt((tip_x - base_x) ** 2 + (tip_y - base_y) ** 2),
-            ]
-        self.df.loc[self.now_time, 'now_leaf_num'] = len(self.key_list)
-        self.df.loc[self.now_time, 're_detection'] = 0
-            # 萎れ指標を計算
-        self.cal_wilt()
-        self.cal_final_wilt()
+            # IoUが高いBBoxを用いて更新
+            # bbox情報を更新
+            self.df = self.get_best_bbox(bbox_list)
+            
+            for i in self.key_list:
+                x1 = self.df[str(i) + "_bbox_x1"].dropna().iloc[-1]
+                y1 = self.df[str(i) + "_bbox_y1"].dropna().iloc[-1]
+                x2 = self.df[str(i) + "_bbox_x2"].dropna().iloc[-1]
+                y2 = self.df[str(i) + "_bbox_y2"].dropna().iloc[-1]
+                # bboxから画像を切り出して640x640にリサイズ
+                clip, new_x1, new_y1, new_x2, new_y2 = get_frame(image, [x1, y1, x2, y2])
+                clip = cv2.resize(clip, (self.pose_size, self.pose_size))
+                # POSE推定
+                pose_results = self.pose.predict(clip, imgsz=640, conf=0.1)
+                xys = pose_results[0].keypoints.xy[0].tolist()
+                base_x, base_y = xys[0][0], xys[0][1]
+                tip_x, tip_y = xys[1][0], xys[1][1]
+                base_x = base_x /self.pose_size * (new_x2 - new_x1) + new_x1
+                base_y = base_y /self.pose_size * (new_y2 - new_y1) + new_y1
+                tip_x = tip_x /self.pose_size * (new_x2 - new_x1) + new_x1
+                tip_y = tip_y /self.pose_size * (new_y2 - new_y1) + new_y1
+                # dfに保存
+                self.df.loc[self.now_time, [f'{i}_base_x', f'{i}_base_y', f'{i}_tip_x', f'{i}_tip_y', f'{i}_angle', f'{i}_length']] = [
+                    base_x, base_y, tip_x, tip_y,
+                    np.arctan2(tip_y - base_y, tip_x - base_x),
+                    np.sqrt((tip_x - base_x) ** 2 + (tip_y - base_y) ** 2),
+                ]
+            self.df.loc[self.now_time, 'now_leaf_num'] = len(self.key_list)
+            self.df.loc[self.now_time, 're_detection'] = 0
+                # 萎れ指標を計算
+            self.cal_wilt()
+            self.cal_final_wilt()
 
-        if len(self.key_list) < 5:
+            if len(self.key_list) < 5:
+                self.df.loc[self.now_time, 're_detection'] = 1
+        except:
             self.df.loc[self.now_time, 're_detection'] = 1
-
         return self.df
 
 

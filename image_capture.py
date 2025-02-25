@@ -10,8 +10,8 @@ def capture_image(save_folder: str, resolution: tuple):
     cap = cv2.VideoCapture(0)
 
     # 解像度を設定
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[1])
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
     # カメラが正しく開けたか確認
     if not cap.isOpened():
@@ -26,6 +26,8 @@ def capture_image(save_folder: str, resolution: tuple):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = os.path.join(save_folder, f"image_{timestamp}.jpg")
 
+        frame = cv2.resize(frame, (resolution[0], resolution[1]))
+
         # 画像を保存
         cv2.imwrite(filename, frame)
         print(f"画像を保存しました: {filename}")
@@ -35,8 +37,5 @@ def capture_image(save_folder: str, resolution: tuple):
     # カメラを解放
     cap.release()
 
-# 例: 640x480 解像度で 'images' フォルダに保存
-# capture_image('images', (640, 480))
-
 if __name__ == '__main__':
-    capture_image('images', (640, 480))
+    capture_image('images', (1024, 1024))

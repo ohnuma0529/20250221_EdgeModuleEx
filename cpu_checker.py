@@ -21,6 +21,7 @@ with open("setting/setting.json")as f:
 
 infdb = InfluxDBWrapper("HappyAI")
 edge_id = setting["edge"]["ID"]
+infdb_server = InfluxDBWrapper("HappyAIServer")
 
 while True:
     now_time = datetime.datetime.now()
@@ -33,6 +34,9 @@ while True:
     # influxDBにアップロード
     infdb.write_single_point(edge_id, now_time, "cpu_usage", cpu_usage)
     infdb.write_single_point(edge_id, now_time, "cpu_temp", cpu_temp)
-    
+    # server側にもアップロード
+    infdb_server.write_single_point(edge_id, now_time, "cpu_usage", cpu_usage)
+    infdb_server.write_single_point(edge_id, now_time, "cpu_temp", cpu_temp)
+
     print(f"CPU Usage: {cpu_usage}%, CPU Temp: {cpu_temp}°C")
     time.sleep(10)

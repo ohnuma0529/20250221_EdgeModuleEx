@@ -70,6 +70,10 @@ def main():
         infdb = InfluxDBWrapper("HappyAI")
         infdb.write_single_point(edge_id, now_time, "wilt", float(df['final_wilt'].iloc[-1]))
         infdb.write_single_point(edge_id, now_time, "inference_time", inference_time)
+
+        infdb_server = InfluxDBWrapper("HappyAIServer")
+        infdb_server.write_single_point(edge_id, now_time, "wilt", float(df['final_wilt'].iloc[-1]))
+        infdb_server.write_single_point(edge_id, now_time, "inference_time", inference_time)
     else:
         print("動作時間外：",now_time)
 if __name__ == "__main__":
