@@ -29,7 +29,7 @@ def capture_image(area_id, now_time, save_folder, resolution):
 
     # フレームをキャプチャ
     ret, frame = cap.read()
-    frame = cv2.resize(frame, (resolution[0], resolution[1]))
+    # frame = cv2.resize(frame, (resolution[0], resolution[1]))
     if ret:
         # 保存するファイル名を作成（タイムスタンプ付き）
         timestamp = now_time.strftime("%Y%m%d_%H%M")
