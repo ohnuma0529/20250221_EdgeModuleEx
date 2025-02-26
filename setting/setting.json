@@ -10,12 +10,12 @@
         "ID": "ohnuma"
     },
     "edge": {
-        "IP": "192.168.200.102",
+        "IP": "192.168.55.102",
         "ID": "02",
         "tracking_num" : 10,
         "server_flag": false,
         "start_time" : "0700",
-        "end_time" : "2300",
+        "end_time" : "1700",
         "width" : 1024,
         "height" : 1024,
         "save_path" : "/home/pi/Desktop/data"

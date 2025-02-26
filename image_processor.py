@@ -19,8 +19,8 @@ def capture_image(area_id, now_time, save_folder, resolution):
     cap = cv2.VideoCapture(0)
 
     # 解像度を設定
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[1])
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
     # カメラが正しく開けたか確認
     if not cap.isOpened():
@@ -29,7 +29,7 @@ def capture_image(area_id, now_time, save_folder, resolution):
 
     # フレームをキャプチャ
     ret, frame = cap.read()
-
+    frame = cv2.resize(frame, (resolution[0], resolution[1]))
     if ret:
         # 保存するファイル名を作成（タイムスタンプ付き）
         timestamp = now_time.strftime("%Y%m%d_%H%M")
