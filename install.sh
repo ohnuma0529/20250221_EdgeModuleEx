@@ -71,6 +71,8 @@ sudo cp cpu_checker.service /etc/systemd/system/
 sudo systemctl enable calc_wilt.service
 sudo systemctl enable copy_folder.service
 sudo systemctl enable cpu_checker.service
+sudo systemctl enable calc_wilt.timer
+sudo systemctl enable copy_folder.timer
 
 # タイマーを開始
 sudo systemctl start calc_wilt.timer
