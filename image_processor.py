@@ -5,18 +5,35 @@ import os
 import pandas as pd
 import sys
 import torch
+import time
 
 from ultralytics import YOLO
 
 sys.path.append("Depth-Anything-V2")
 from depth_anything_v2.dpt import DepthAnythingV2
 
-def capture_image(area_id, now_time, save_folder, resolution):
+def reset_usb():
+    """特定のUSBデバイス（Logitech C920）をリセットする"""
+    print("USBカメラをリセットします...")
+    os.system("sudo usb_modeswitch -v 046d -p 08e5 -R")
+    time.sleep(3)
+
+def capture_image(area_id, now_time, save_folder, resolution, max_retries=5):
     # 保存先フォルダが存在しない場合は作成
     os.makedirs(save_folder, exist_ok=True)
 
-    # Webカメラを初期化（0は通常、最初に見つかったカメラを指す）
-    cap = cv2.VideoCapture(0)
+    for attempt in range(max_retries):
+        cap = cv2.VideoCapture(0)
+        if cap.isOpened():
+            break
+        print(f"カメラを開けませんでした。（試行 {attempt + 1}/{max_retries}）")
+        cap.release()
+        if attempt == max_retries // 2:  # 途中でUSBリセットを試す
+            reset_usb()
+        time.sleep(2)  # 少し待機してリトライ
+    else:
+        print("カメラを認識できませんでした。処理を中止します。")
+        return None
 
     # 解像度を設定
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
@@ -34,7 +51,6 @@ def capture_image(area_id, now_time, save_folder, resolution):
         # 保存するファイル名を作成（タイムスタンプ付き）
         timestamp = now_time.strftime("%Y%m%d_%H%M")
         filename = os.path.join(save_folder, f"{area_id}_{timestamp}.jpg")
-
         # 画像を保存
         cv2.imwrite(filename, frame)
         print(f"画像を保存しました: {filename}")
@@ -511,13 +527,12 @@ class image_processor:
 
 
 if __name__ == "__main__":
-    df = pd.DataFrame()
-    #dfにdatetime型のインデックスを追加
-    df.index = pd.to_datetime(df.index)
-    image_dir = "20250208/images"
-    #テスト用に20250208のタイムスタンプを作成してnow_timeに代入
-    # 2025-02-08 07:01:00
+    # df = pd.DataFrame()
+    # df.index = pd.to_datetime(df.index)
+    # image_dir = "20250208/images"
     now_time = datetime(2025, 2, 8, 7, 1, 0)
-    img_pro = image_processor(image_dir, 10, now_time)
-    df = img_pro.first_detection()
-    df.to_csv("result.csv")
+    # img_pro = image_processor(image_dir, 10, now_time)
+    # df = img_pro.first_detection()
+    # df.to_csv("result.csv")
+    file_name = capture_image("02", now_time, "../test", 1024)
+    print(file_name)

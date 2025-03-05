@@ -32,3 +32,5 @@ sudo systemctl enable cpu_checker.service
 sudo systemctl start calc_wilt.timer
 sudo systemctl start copy_folder.timer
 sudo systemctl start cpu_checker.service
+
+カメラ見えなくなる問題のためにsudo apt install usbutils usb-modeswitch -y
