@@ -34,3 +34,9 @@ sudo systemctl start copy_folder.timer
 sudo systemctl start cpu_checker.service
 
 カメラ見えなくなる問題のためにsudo apt install usbutils usb-modeswitch -y
+➡ラズパイのUSBポートが省電力モードだったからかもしれないからいったん無効化
+sudo nano /boot/cmdline.txt
+➡このファイルを編集しないでくれ。/boot/firmware/cmdline.txtにあるよ。って書いてあったから変更
+sudo nano /boot/firmware/cmdline.txt
+usbcore.autosuspend=-1
+sudo reboot
