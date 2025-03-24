@@ -201,7 +201,8 @@ class image_processor:
             self.pose = YOLO("weights/pose/20241217_3200aug.pt")
         else:
             self.detect = YOLO("weights/detect/20241106_detect_saved_model/20241106_detect_float32.tflite")
-            self.pose = YOLO("weights/pose/syn_800_2_saved_model/syn_800_2_float32.tflite")
+            # self.pose = YOLO("weights/pose/syn_800_2_saved_model/syn_800_2_float32.tflite")
+            self.pose = YOLO("weights/pose/20241217_3200aug.pt")
         
         self.detect_size = 1024
         self.pose_size = 640
